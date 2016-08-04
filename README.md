@@ -35,7 +35,7 @@ myModel.findInBatches(query, options, function (err, docs, next) {
 ## About the parameters
 - 1st param is the query to send to `myModel.Find`
 
-- 2nd param is the options, currenty only batchSize. This translates to a limit/offset query
+- 2nd param is the options, currenty only batchSize and select. 
 
 - 3rd param is the "Batch Handler". A function that receives each batch of documents.
   - The batch handler's parameters are 
@@ -45,5 +45,20 @@ myModel.findInBatches(query, options, function (err, docs, next) {
      - 4 The count of docs that matched the query
      - 5 The amount of docs left to find (actual documents unprocessed by your batchHandler can be found by (documentsRemaining + docs.length) ) 
 
+## Options
+```
+var options = {
+    batchSize : 1000,
+    select : {
+        name : 1,
+        email : 1,
+        phone : 1
+    }
+};
+```
+The select option is an object that gets passed directly to mongoose's select function. The above example would grab 1000 document batches with only the name, email, phone, and _id keys. (_id is always included)
+
 ## Final resolution
 This is done via promise `then`. The promise will get resolved after all documents have been processed, or the cancel command is sent into the nextBatch function.
+
+
