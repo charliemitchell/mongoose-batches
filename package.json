@@ -1,6 +1,6 @@
 {
    "name" : "mongoose-batches",
-   "main" : "./index.js",
+   "main" : "index.js",
    "version": "0.0.1",
    "description": "A Mongoose plugin to work with large amounts of data via async batch processing.",
    "author": "Charlie Mitchell <charliesemailis@gmail.com>",
