@@ -15,6 +15,6 @@
      "url": "http://github.com/charliemitchell/mongoose-batches.git"
    },
    "dependencies": {
-      "bluebird" : "^2.9.x",
+      "bluebird" : "^2.9.x"
    }
 }
