@@ -30,9 +30,13 @@ module.exports = function (schema) {
     return new promise.Promise(function (resolve, reject) {
 
       var query = this.find(find);
-      if (opts.queryGenerator) query = opts.queryGenerator(query);
       var countQuery = this.find(find);
-      if (opts.queryGenerator) countQuery = opts.queryGenerator(countQuery);
+
+      if (opts.queryGenerator) {
+        query = opts.queryGenerator(query);
+        countQuery = opts.queryGenerator(countQuery);
+      }
+
       countQuery.count().exec(function (err, count) {
 
         var documentsRemaining = count;
