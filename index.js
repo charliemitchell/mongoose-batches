@@ -22,7 +22,7 @@ module.exports = function (schema) {
 
 
   schema.statics.findInBatches = schema.statics.findInBatches || function (find, opts, batchHandler) {
-      
+
     find = (typeof find === 'object' && find) || {};
 
     opts = options(opts || {});
@@ -30,11 +30,17 @@ module.exports = function (schema) {
     return new promise.Promise(function (resolve, reject) {
 
       var query = this.find(find);
+      var countQuery = this.find(find);
 
-      this.find(find).count().exec(function (err, count) {
-        
+      if (opts.queryGenerator) {
+        query = opts.queryGenerator(query);
+        countQuery = opts.queryGenerator(countQuery);
+      }
+
+      countQuery.count().exec(function (err, count) {
+
         var documentsRemaining = count;
-        
+
         var processBatch = function (cancel) {
 
           if (cancel === 'cancel') {

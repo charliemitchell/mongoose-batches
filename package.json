@@ -1,20 +1,27 @@
 {
-   "name" : "mongoose-batches",
-   "main" : "index.js",
-   "version": "0.0.1",
+   "name": "mongoose-batches",
+   "main": "index.js",
+   "version": "0.0.2",
    "description": "A Mongoose plugin to work with large amounts of data via async batch processing.",
    "author": "Charlie Mitchell <charliesemailis@gmail.com>",
    "license": "MIT",
-   "keywords" : [ "in batches", "find in batches", "mongoose batch", "batch processing", "mongoose async", "async batch processing"],
+   "keywords": [
+      "in batches",
+      "find in batches",
+      "mongoose batch",
+      "batch processing",
+      "mongoose async",
+      "async batch processing"
+   ],
    "bugs": {
-     "url": "http://github.com/charliemitchell/mongoose-batches",
-     "email": "charliesemailis@gmail.com"
+      "url": "http://github.com/charliemitchell/mongoose-batches",
+      "email": "charliesemailis@gmail.com"
    },
    "repository": {
-     "type": "git",
-     "url": "http://github.com/charliemitchell/mongoose-batches.git"
+      "type": "git",
+      "url": "http://github.com/charliemitchell/mongoose-batches.git"
    },
    "dependencies": {
-      "bluebird" : "^2.9.x"
+      "bluebird": "^2.9.x"
    }
 }

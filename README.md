@@ -6,7 +6,7 @@
  **setup: myModel.js**
 
 ```
-var findInBatches = require('mongoose-batches'); 
+var findInBatches = require('mongoose-batches');
 
 var myModel = new Schema({
   //... Your Schema Here
@@ -15,7 +15,7 @@ var myModel = new Schema({
 myModel.plugin(findInBatches);
 
 //... etc
-``` 
+```
 
 **usage: someFile.js**
 
@@ -35,15 +35,16 @@ myModel.findInBatches(query, options, function (err, docs, next) {
 ## About the parameters
 - 1st param is the query to send to `myModel.Find`
 
-- 2nd param is the options, currenty only batchSize and select. 
+- 2nd param is the options, currenty only batchSize, select, and queryGenerator.
+  - queryGenerator is a function used to modify the query in addition to the query parameter that is passed to `myModel.Find`. It allows you to use the predefined queries build onto the model.
 
 - 3rd param is the "Batch Handler". A function that receives each batch of documents.
-  - The batch handler's parameters are 
-     - 1 any errors returned from the find query 
+  - The batch handler's parameters are
+     - 1 any errors returned from the find query
      - 2 (Array) the batch of documents
      - 3 the function to invoke the next batch. (explicitly passing in 'cancel' to nextBatch will stop the operation and invoke the final promise. `nextBatch('cancel')`)
      - 4 The count of docs that matched the query
-     - 5 The amount of docs left to find (actual documents unprocessed by your batchHandler can be found by (documentsRemaining + docs.length) ) 
+     - 5 The amount of docs left to find (actual documents unprocessed by your batchHandler can be found by (documentsRemaining + docs.length) )
 
 ## Options
 ```
@@ -53,6 +54,9 @@ var options = {
         name : 1,
         email : 1,
         phone : 1
+    },
+    queryGenerator: function(query) {
+      return query.where({ name: {$ne: null}})
     }
 };
 ```
