@@ -37,7 +37,7 @@ module.exports = function (schema) {
         countQuery = opts.queryGenerator(countQuery);
       }
 
-      countQuery.count().exec(function (err, count) {
+      countQuery.countDocuments().exec(function (err, count) {
 
         var documentsRemaining = count;
 
